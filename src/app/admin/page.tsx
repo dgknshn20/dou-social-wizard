@@ -37,7 +37,7 @@ export default function AdminPage() {
       <div className="min-h-screen bg-black flex items-center justify-center p-4">
         <form onSubmit={handleLogin} className="bg-neutral-900 p-8 rounded-xl border border-white/10 w-full max-w-sm">
           <div className="flex justify-center mb-6">
-            <div className="p-3 bg-[#800000]/20 rounded-full text-[#800000]">
+            <div className="p-3 bg-brand/20 rounded-full text-brand">
               <Lock size={32} />
             </div>
           </div>
@@ -46,10 +46,10 @@ export default function AdminPage() {
             type="password" 
             value={password}
             onChange={(e) => setPassword(e.target.value)}
-            className="w-full bg-black/50 border border-white/10 rounded-lg p-3 text-white mb-4 focus:border-[#800000] outline-none"
+            className="w-full bg-black/50 border border-white/10 rounded-lg p-3 text-white mb-4 focus:border-brand outline-none"
             placeholder="Şifre"
           />
-          <button type="submit" className="w-full bg-[#800000] text-white font-bold py-3 rounded-lg hover:bg-[#600000]">
+          <button type="submit" className="w-full bg-brand text-white font-bold py-3 rounded-lg hover:bg-brand-900">
             Giriş Yap
           </button>
         </form>
@@ -62,7 +62,7 @@ export default function AdminPage() {
       <div className="max-w-6xl mx-auto">
         <div className="flex justify-between items-center mb-8 border-b border-white/10 pb-4">
           <div className="flex items-center gap-3">
-            <LayoutDashboard className="text-[#800000]" size={32} />
+            <LayoutDashboard className="text-brand" size={32} />
             <h1 className="text-2xl font-bold">Dou Dashboard</h1>
           </div>
           <button onClick={fetchStats} className="p-2 bg-neutral-800 rounded hover:bg-neutral-700">

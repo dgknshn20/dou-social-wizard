@@ -50,3 +50,87 @@ body {
   border: 1px solid rgba(255, 255, 255, 0.08);
   box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
 }
+
+/* Fallback keyframes and helper animation classes for compatibility
+   with Tailwind v4 or when JS/plugins don't generate utility classes. */
+@keyframes fade-in {
+  0% { opacity: 0; transform: translateY(6px); }
+ 100% { opacity: 1; transform: translateY(0); }
+}
+
+
+@keyframes marquee {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
+}
+
+.marquee-scroll {
+  animation: marquee 30s linear infinite;
+}
+@keyframes slide-up {
+  0% { opacity: 0; transform: translateY(8px); }
+ 100% { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes float {
+  0% { transform: translateY(0); }
+ 50% { transform: translateY(-6px); }
+ 100% { transform: translateY(0); }
+}
+
+@keyframes pop {
+  0% { opacity: 0; transform: scale(.96); }
+ 100% { opacity: 1; transform: scale(1); }
+}
+
+@keyframes shimmer {
+  0% { background-position: -200% 0; }
+ 100% { background-position: 200% 0; }
+}
+
+.shimmer {
+  background: linear-gradient(90deg, rgba(255,255,255,0.02) 0%, rgba(255,255,255,0.08) 50%, rgba(255,255,255,0.02) 100%);
+  background-size: 200% 100%;
+  animation: shimmer 1.8s linear infinite;
+  mix-blend-mode: screen;
+}
+
+.animate-fade-in { animation: fade-in 300ms cubic-bezier(.16,.84,.3,1) both; }
+.animate-slide-up { animation: slide-up 350ms cubic-bezier(.16,.84,.3,1) both; }
+.animate-float { animation: float 3s ease-in-out infinite both; }
+.animate-pop { animation: pop 360ms cubic-bezier(.2,.8,.2,1) both; }
+
+@media (prefers-reduced-motion: reduce) {
+  .shimmer,
+  .animate-fade-in,
+  .animate-slide-up,
+  .animate-float,
+  .animate-pop {
+    animation: none !important;
+  }
+}
+
+/* Marquee / infinite scroll fallback for logo strips */
+@keyframes infinite-scroll {
+  0% { transform: translateX(0%); }
+  100% { transform: translateX(-50%); }
+}
+.animate-infinite-scroll {
+  display: flex;
+  animation: infinite-scroll 18s linear infinite;
+}
+
+.fade-up-init {
+  opacity: 0;
+  transform: translateY(24px);
+  transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+}
+
+.fade-up-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
