@@ -586,7 +586,7 @@ Türkçe, sıcak ama profesyonel bir ajans dili kullan.
   const handleWhatsAppClick = () => {
     if (!scenarios) return;
 
-    const current = scenarios[activeTab];
+    const current = (scenarios as any)[activeTab]
     const messageLines = [
       `Merhaba Dou Social 👋`,
       ``,
@@ -601,7 +601,7 @@ Türkçe, sıcak ama profesyonel bir ajans dili kullan.
       `Toplam Önerilen Yatırım: ${current.total.toLocaleString('tr-TR')}₺`,
       ``,
       `Önerilen paketler:`,
-      ...current.items.map((item) => `- ${item.name} (${item.category}) ~ ${item.price.toLocaleString('tr-TR')}₺`),
+      ...current.items.map((item: any) => `- ${item.name} (${item.category}) ~ ${item.price.toLocaleString('tr-TR')}₺`),
       ``,
       `Bu planı birlikte gözden geçirip, gerekirse bütçeyi veya içeriği revize etmek istiyorum.`,
     ];
