@@ -1,3 +1,11 @@
+// Hangi sayfalar olduğunu tanımlayalım
+type PageTab = 'home' | 'about' | 'wizard' | 'contact';
+
+// Navbar'ın props tipi
+type NavbarProps = {
+  activePage: PageTab;
+  setActivePage: (page: PageTab) => void;
+};
 // Navbar içindeki tab listende Wizard için özel stil verebilirsin
 const Navbar = ({ activePage, setActivePage }: NavbarProps) => {
   const tabs: { id: PageTab; label: string }[] = [
@@ -12,8 +20,8 @@ const Navbar = ({ activePage, setActivePage }: NavbarProps) => {
       <div className="mx-auto flex max-w-5xl items-center justify-between px-4 py-3 md:px-6">
         {/* Logo */}
              <div className="flex items-center gap-2 cursor-pointer" onClick={() => setActivePage('home')}>
-             <span className="text-2xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-white to-neutral-400">
-               Dou<span className="text-[#800000]">Social</span>
+             <span className="text-2xl font-bold bg-clip-text text-transparent bg-linear-to-r from-white to-neutral-400">
+               Dou<span className="text-brand">Social</span>
              </span>
           </div>
 
@@ -32,16 +40,16 @@ const Navbar = ({ activePage, setActivePage }: NavbarProps) => {
                   isActive
                     ? "bg-white text-black shadow-lg shadow-black/50"
                     : "text-neutral-300 hover:text-white hover:bg-white/10",
-                  isWizard && !isActive && "border border-[#800000]/40",
+                  isWizard && !isActive && "border border-brand/40",
                   isWizard && "flex items-center gap-1.5"
                 ].join(" ")}
               >
                 {isWizard && (
-                  <span className="h-1.5 w-1.5 rounded-full bg-[#800000] animate-pulse" />
+                  <span className="h-1.5 w-1.5 rounded-full bg-brand animate-pulse" />
                 )}
                 <span>{tab.label}</span>
                 {isWizard && (
-                  <span className="hidden text-[10px] font-medium text-[#ffcccc] md:inline">
+                  <span className="hidden text-[10px] font-medium text-brand-100 md:inline">
                     • Önerini Bul
                   </span>
                 )}
@@ -52,7 +60,7 @@ const Navbar = ({ activePage, setActivePage }: NavbarProps) => {
           {/* Sağda “Teklif Al” mini butonu (opsiyonel) */}
           <button
             onClick={() => setActivePage('wizard')}
-            className="ml-1 hidden rounded-full bg-[#800000] px-3 py-1.5 text-xs font-medium text-white shadow-md shadow-[#800000]/40 transition-transform duration-200 hover:scale-[1.03] md:inline-flex"
+            className="ml-1 hidden rounded-full bg-brand px-3 py-1.5 text-xs font-medium text-white shadow-md shadow-brand/40 transition-transform duration-200 hover:scale-[1.03] md:inline-flex"
           >
             Teklif Al
           </button>

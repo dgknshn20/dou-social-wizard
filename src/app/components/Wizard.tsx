@@ -346,7 +346,7 @@ const Wizard = () => {
   if (isAnalyzing) {
     return (
       <div className="flex flex-col items-center justify-center min-h-[60vh]">
-        <div className="animate-spin rounded-full h-16 w-16 border-t-2 border-b-2 border-[#800000] mb-6"></div>
+        <div className="animate-spin rounded-full h-16 w-16 border-t-2 border-b-2 border-brand mb-6"></div>
         <h2 className="text-2xl font-bold mb-2">Veriler İşleniyor...</h2>
         <p className="text-neutral-400">Lütfen bekleyiniz, bağlantı kuruluyor.</p>
       </div>
@@ -366,12 +366,12 @@ const Wizard = () => {
               className="absolute inset-0 bg-black/80 backdrop-blur-sm animate-in fade-in duration-300"
               onClick={() => setShowSuccessModal(false)}
             />
-            <div className="relative bg-[#111] border border-white/10 rounded-3xl p-8 max-w-md w-full text-center shadow-2xl shadow-[#800000]/30 animate-in zoom-in-95 duration-300 overflow-hidden">
+            <div className="relative bg-[#111] border border-white/10 rounded-3xl p-8 max-w-md w-full text-center shadow-2xl shadow-brand/30 animate-in zoom-in-95 duration-300 overflow-hidden">
               {/* Glow Effect */}
-              <div className="absolute top-0 left-1/2 -translate-x-1/2 w-32 h-32 bg-[#800000]/40 rounded-full blur-[50px] -mt-16 pointer-events-none"></div>
+              <div className="absolute top-0 left-1/2 -translate-x-1/2 w-32 h-32 bg-brand/40 rounded-full blur-[50px] -mt-16 pointer-events-none"></div>
 
               <div className="relative z-10">
-                <div className="mx-auto w-20 h-20 bg-gradient-to-br from-[#800000] to-red-600 rounded-full flex items-center justify-center mb-6 shadow-lg shadow-red-900/40">
+                <div className="mx-auto w-20 h-20 bg-linear-to-br from-brand to-red-600 rounded-full flex items-center justify-center mb-6 shadow-lg shadow-red-900/40">
                   <CheckCircle2 className="text-white w-10 h-10 animate-bounce" />
                 </div>
                 
@@ -401,7 +401,7 @@ const Wizard = () => {
         <div className="flex flex-col md:flex-row justify-between items-center mb-8 pb-4 border-b border-white/10 gap-4">
           <div>
             <h1 className="text-3xl font-bold text-white flex items-center gap-2">
-              Sonuç Raporu <Sparkles className="text-[#800000]" />
+              Sonuç Raporu <Sparkles className="text-brand" />
             </h1>
             <div className="flex gap-2 text-sm text-neutral-400 mt-1">
               <span>{leadInfo.companyName}</span>
@@ -416,9 +416,9 @@ const Wizard = () => {
           </div>
         </div>
 
-        <div className="bg-gradient-to-br from-neutral-900 to-[#1a0000]/30 p-6 rounded-2xl border border-white/10 mb-8 backdrop-blur-sm">
+        <div className="bg-linear-to-br from-neutral-900 to-[#1a0000]/30 p-6 rounded-2xl border border-white/10 mb-8 backdrop-blur-sm">
           <div className="flex items-start gap-4">
-            <Bot className="text-[#800000] shrink-0 mt-1" size={32} />
+            <Bot className="text-brand shrink-0 mt-1" size={32} />
             <div>
               <h3 className="font-bold text-lg mb-2">Strateji Özeti</h3>
               <p className="text-neutral-300 leading-relaxed text-sm md:text-base">{strategyNote}</p>
@@ -434,7 +434,7 @@ const Wizard = () => {
                 onClick={() => setActiveTab(type)}
                 className={`py-3 px-4 rounded-lg text-sm font-bold transition-all duration-300 ${
                   activeTab === type 
-                  ? 'bg-[#800000] text-white shadow-lg' 
+                  ? 'bg-brand text-white shadow-lg' 
                   : 'text-neutral-400 hover:text-white hover:bg-white/5'
                 }`}
               >
@@ -446,7 +446,7 @@ const Wizard = () => {
           <div className="grid lg:grid-cols-3 gap-8">
             <div className="lg:col-span-2 space-y-4">
               <h3 className="text-xl font-bold flex items-center gap-2">
-                <Star className="text-[#800000]" size={20} />
+                <Star className="text-brand" size={20} />
                 {currentData.label} İçeriği
               </h3>
               <p className="text-neutral-400 text-sm mb-4">{currentData.desc}</p>
@@ -457,7 +457,7 @@ const Wizard = () => {
                     key={idx} 
                     className={`
                       bg-neutral-900/60 border border-white/10 p-5 rounded-xl transition-all duration-300
-                      hover:border-[#800000] hover:shadow-lg hover:shadow-[#800000]/20 hover:-translate-y-2
+                      hover:border-brand hover:shadow-lg hover:shadow-brand/20 hover:-translate-y-2
                       flex flex-col h-full animate-in slide-in-from-bottom-4 fade-in fill-mode-both
                       ${(currentData.items.length % 2 !== 0 && idx === currentData.items.length - 1) ? 'md:col-span-2' : ''}
                     `}
@@ -465,13 +465,13 @@ const Wizard = () => {
                   >
                     <div className="flex justify-between items-start mb-2">
                       <span className="text-xs font-bold px-2 py-1 rounded bg-white/5 text-neutral-300 uppercase">{pkg.category}</span>
-                      <span className="text-[#800000] font-bold">{pkg.price.toLocaleString()}₺</span>
+                      <span className="text-brand font-bold">{pkg.price.toLocaleString()}₺</span>
                     </div>
                     <h4 className="font-bold text-white mb-1">{pkg.name}</h4>
-                    <ul className="space-y-2 mt-3 flex-grow">
+                    <ul className="space-y-2 mt-3 grow">
                       {pkg.features.map((f, i) => (
                         <li key={i} className="text-xs text-neutral-400 flex items-start gap-2">
-                          <Check size={12} className="text-[#800000] mt-0.5" /> {f}
+                          <Check size={12} className="text-brand mt-0.5" /> {f}
                         </li>
                       ))}
                     </ul>
@@ -481,12 +481,12 @@ const Wizard = () => {
             </div>
 
             <div className="lg:col-span-1">
-              <div className="bg-[#800000] p-6 rounded-2xl text-white shadow-xl shadow-[#800000]/20 sticky top-8 text-center transition-all duration-300 hover:shadow-[#800000]/40 hover:-translate-y-1">
+              <div className="bg-brand p-6 rounded-2xl text-white shadow-xl shadow-brand/20 sticky top-8 text-center transition-all duration-300 hover:shadow-brand/40 hover:-translate-y-1">
                 <div className="text-white/80 text-sm font-medium mb-1">Toplam Aylık Yatırım</div>
                 <div className="text-4xl font-bold mb-1">{currentData.total.toLocaleString()}₺</div>
                 <div className="text-xs text-white/60 mb-6">+KDV</div>
                 
-                <button onClick={handleWhatsAppClick} className="w-full bg-white text-[#800000] py-3 rounded-lg font-bold flex items-center justify-center gap-2 hover:bg-neutral-100 transition-colors shadow-lg">
+                <button onClick={handleWhatsAppClick} className="w-full bg-white text-brand py-3 rounded-lg font-bold flex items-center justify-center gap-2 hover:bg-neutral-100 transition-colors shadow-lg">
                   <MessageCircle size={18} /> Planı Onayla
                 </button>
                 <p className="text-[10px] text-white/70 mt-4 leading-tight">
@@ -499,7 +499,7 @@ const Wizard = () => {
 
         <div className="border-t border-white/10 pt-8 mt-8">
           <div className="flex justify-between items-center mb-6">
-            <h3 className="text-lg font-bold flex items-center gap-2"><Fingerprint className="text-[#800000]"/> Marka Kimliği Analizi</h3>
+            <h3 className="text-lg font-bold flex items-center gap-2"><Fingerprint className="text-brand"/> Marka Kimliği Analizi</h3>
             {!brandIdentity && (
               <button onClick={generateBrandIdentity} disabled={isLoadingIdentity} className="bg-neutral-800 border border-white/10 px-4 py-2 rounded text-xs hover:bg-neutral-700 transition-colors flex items-center gap-2">
                 {isLoadingIdentity ? <Loader2 className="animate-spin" size={14}/> : <Palette size={14}/>} {isLoadingIdentity ? 'Analiz Ediliyor...' : 'Analizi Başlat'}
@@ -509,7 +509,7 @@ const Wizard = () => {
           {brandIdentity && (
             <div className="grid md:grid-cols-2 gap-6 bg-neutral-900/40 p-6 rounded-xl border border-white/5 animate-in fade-in">
               <div>
-                <div className="text-[#800000] text-sm font-bold uppercase mb-1">Arketip</div>
+                <div className="text-brand text-sm font-bold uppercase mb-1">Arketip</div>
                 <div className="text-2xl font-bold text-white mb-2">{brandIdentity.archetype}</div>
                 <p className="text-neutral-400 text-sm mb-4">{brandIdentity.archetype_description}</p>
                 <div className="flex flex-wrap gap-2">
@@ -517,7 +517,7 @@ const Wizard = () => {
                 </div>
               </div>
               <div>
-                <div className="text-[#800000] text-sm font-bold uppercase mb-2">Slogan Önerileri</div>
+                <div className="text-brand text-sm font-bold uppercase mb-2">Slogan Önerileri</div>
                 <ul className="space-y-2">
                   {brandIdentity.slogans?.map((s: string, i: number) => <li key={i} className="text-neutral-300 italic text-sm border-b border-white/5 pb-1">"{s}"</li>)}
                 </ul>
@@ -534,13 +534,13 @@ const Wizard = () => {
   return (
     <div className="w-full max-w-2xl mx-auto py-8">
          <div className="w-full h-1 bg-neutral-900 fixed top-20 left-0 z-40">
-            <div className="h-full bg-[#800000] transition-all duration-500 ease-out" style={{ width: `${progress}%` }} />
+            <div className="h-full bg-brand transition-all duration-500 ease-out" style={{ width: `${progress}%` }} />
         </div>
 
         {step < QUESTIONS.length ? (
         <>
           <div className="mb-8 text-center animate-in fade-in slide-in-from-bottom-4 duration-500">
-            <span className="text-[#800000] font-bold text-xs tracking-widest uppercase mb-2 block">ADIM {step + 1} / {QUESTIONS.length}</span>
+            <span className="text-brand font-bold text-xs tracking-widest uppercase mb-2 block">ADIM {step + 1} / {QUESTIONS.length}</span>
             <h2 className="text-3xl font-bold text-white mb-6">{QUESTIONS[step].text}</h2>
           </div>
           <div className="space-y-3">
@@ -548,10 +548,10 @@ const Wizard = () => {
               <button
                 key={idx}
                 onClick={() => handleAnswer(opt.value)}
-                className="w-full flex items-center justify-between p-5 bg-neutral-900/80 border border-white/10 rounded-xl hover:border-[#800000] hover:bg-[#800000]/10 transition-all text-left group backdrop-blur-sm"
+                className="w-full flex items-center justify-between p-5 bg-neutral-900/80 border border-white/10 rounded-xl hover:border-brand hover:bg-brand/10 transition-all text-left group backdrop-blur-sm"
               >
                 <span className="text-lg font-medium text-neutral-300 group-hover:text-white">{opt.label}</span>
-                <ChevronRight className="text-neutral-600 group-hover:text-[#800000] transition-all" />
+                <ChevronRight className="text-neutral-600 group-hover:text-brand transition-all" />
               </button>
             ))}
           </div>
@@ -562,7 +562,7 @@ const Wizard = () => {
       ) : (
         <div className="bg-neutral-900/90 p-8 rounded-2xl border border-white/10 backdrop-blur-md animate-in zoom-in duration-300 shadow-2xl">
           <div className="text-center mb-6">
-            <div className="w-12 h-12 bg-[#800000]/20 rounded-full flex items-center justify-center mx-auto mb-4 text-[#800000]">
+            <div className="w-12 h-12 bg-brand/20 rounded-full flex items-center justify-center mx-auto mb-4 text-brand">
               <Check size={24} />
             </div>
             <h2 className="text-2xl font-bold text-white">Harika! Son bir adım...</h2>
@@ -577,7 +577,7 @@ const Wizard = () => {
                 <input 
                   required 
                   type="text" 
-                  className="w-full bg-black/50 border border-white/10 rounded-lg py-3 pl-10 pr-4 text-white focus:border-[#800000] focus:outline-none transition-colors"
+                  className="w-full bg-black/50 border border-white/10 rounded-lg py-3 pl-10 pr-4 text-white focus:border-brand focus:outline-none transition-colors"
                   placeholder="Örn: Ahmet Yılmaz"
                   value={leadInfo.fullName}
                   onChange={e => setLeadInfo({...leadInfo, fullName: e.target.value})}
@@ -591,7 +591,7 @@ const Wizard = () => {
                 <input 
                   required 
                   type="text" 
-                  className="w-full bg-black/50 border border-white/10 rounded-lg py-3 pl-10 pr-4 text-white focus:border-[#800000] focus:outline-none transition-colors"
+                  className="w-full bg-black/50 border border-white/10 rounded-lg py-3 pl-10 pr-4 text-white focus:border-brand focus:outline-none transition-colors"
                   placeholder="Örn: Yılmaz Mimarlık"
                   value={leadInfo.companyName}
                   onChange={e => setLeadInfo({...leadInfo, companyName: e.target.value})}
@@ -606,7 +606,7 @@ const Wizard = () => {
                   <input 
                     required 
                     type="tel" 
-                    className={`w-full bg-black/50 border rounded-lg py-3 pl-10 pr-4 text-white focus:outline-none transition-colors ${errors.phone ? 'border-red-500 focus:border-red-500' : 'border-white/10 focus:border-[#800000]'}`}
+                  className={`w-full bg-black/50 border rounded-lg py-3 pl-10 pr-4 text-white focus:outline-none transition-colors ${errors.phone ? 'border-red-500 focus:border-red-500' : 'border-white/10 focus:border-brand'}`}
                     placeholder="5XX..."
                     value={leadInfo.phone}
                     onChange={e => {
@@ -626,7 +626,7 @@ const Wizard = () => {
                   <input 
                     required 
                     type="email" 
-                    className={`w-full bg-black/50 border rounded-lg py-3 pl-10 pr-4 text-white focus:outline-none transition-colors ${errors.email ? 'border-red-500 focus:border-red-500' : 'border-white/10 focus:border-[#800000]'}`}
+                  className={`w-full bg-black/50 border rounded-lg py-3 pl-10 pr-4 text-white focus:outline-none transition-colors ${errors.email ? 'border-red-500 focus:border-red-500' : 'border-white/10 focus:border-brand'}`}
                     placeholder="isim@sirket.com"
                     value={leadInfo.email}
                     onChange={e => {
@@ -638,7 +638,7 @@ const Wizard = () => {
                 </div>
               </div>
             </div>
-            <button type="submit" className="w-full bg-[#800000] hover:bg-[#600000] text-white font-bold py-4 rounded-lg mt-4 transition-all transform hover:scale-[1.02] shadow-lg flex items-center justify-center gap-2">
+            <button type="submit" className="w-full bg-brand hover:bg-brand-900 text-white font-bold py-4 rounded-lg mt-4 transition-all transform hover:scale-[1.02] shadow-lg flex items-center justify-center gap-2">
               Raporu Göster <ChevronRight size={20} />
             </button>
           </form>
