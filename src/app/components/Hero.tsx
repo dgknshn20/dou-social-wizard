@@ -8,7 +8,6 @@ import {
   Activity,
   HeartPulse,
   Utensils,
-  Store,
   Building2,
 } from "lucide-react";
 
@@ -19,11 +18,10 @@ interface HeroProps {
 
 // Örnek referans markalar (istersen gerçek müşterilerinle güncellersin)
 const REFERENCES = [
-  { name: "İstanbul Fitness A", icon: Activity },
-  { name: "FitLife Kitchen", icon: Utensils },
-  { name: "Jasmin Lotus Spa", icon: HeartPulse },
-  { name: "Local Market Pro", icon: Store },
-  { name: "Ofis & Yapı", icon: Building2 },
+  { name: "YAPIGRANİT MERMERCİLİK", icon: Building2 },
+  { name: "FITLIFE KITCHEN", icon: Utensils },
+  { name: "EN20 SPORT'S CLUB", icon: Activity },
+  { name: "DYT. CEYLİN YASTIKÇI", icon: HeartPulse },
 ];
 
 const Hero: React.FC<HeroProps> = ({ onStartWizard, onContact }) => {

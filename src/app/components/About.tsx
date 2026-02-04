@@ -115,9 +115,9 @@ const About = () => {
           <h2 className="text-3xl font-bold text-white text-center">Rakamlarla Dou Social</h2>
           <div className="grid md:grid-cols-3 gap-8 text-center">
             {[
-              { value: "120+", label: "Tamamlanan Proje" },
-              { value: "40+", label: "Aktif Marka" },
-              { value: "%96", label: "Müşteri Memnuniyeti" },
+              { value: "1000+", label: "Tamamlanan Proje" },
+              { value: "+5", label: "Aktif Marka" },
+              { value: "%100", label: "Müşteri Memnuniyeti" },
             ].map((stat, i) => (
               <div
                 key={i}

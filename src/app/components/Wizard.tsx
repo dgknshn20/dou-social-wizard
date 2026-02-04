@@ -9,7 +9,7 @@ import {
 
 // --- CONFIG ---
 const apiKey = "AIzaSyBBikXR8UdBhpsA0mS_84ml3TcQH__xdi4"; 
-const AGENCY_WHATSAPP_NUMBER = "905424407672"; 
+const AGENCY_WHATSAPP_NUMBER = "905300845468"; 
 
 // --- TYPES ---
 type Category = 'social' | 'production' | 'ads' | 'automation' | '360';
@@ -1163,30 +1163,69 @@ Sadece geçerli JSON döndür, açıklama ekleme. Türkçe yaz.
             </div>
 
             <div className="space-y-1">
-              <label className="text-xs text-neutral-300 flex items-center gap-1">
-                <Phone className="h-3 w-3" /> Telefon
-              </label>
-              <input
-                type="tel"
-                value={leadInfo.phone}
-                onChange={(e) => handleLeadInfoChange('phone', e.target.value)}
-                className="w-full rounded-lg bg-neutral-900/70 border border-white/10 px-3 py-2 text-sm text-white focus:outline-none focus:border-brand/60"
-                placeholder="5xx xxx xx xx"
-              />
-            </div>
+  <label className="text-xs text-neutral-300 flex items-center gap-1">
+    <Phone className="h-3 w-3" /> Telefon
+  </label>
 
-            <div className="space-y-1">
-              <label className="text-xs text-neutral-300 flex items-center gap-1">
-                <Mail className="h-3 w-3" /> E-posta
-              </label>
-              <input
-                type="email"
-                value={leadInfo.email}
-                onChange={(e) => handleLeadInfoChange('email', e.target.value)}
-                className="w-full rounded-lg bg-neutral-900/70 border border-white/10 px-3 py-2 text-sm text-white focus:outline-none focus:border-brand/60"
-                placeholder="ornek@firma.com"
-              />
-            </div>
+  <input
+    type="tel"
+    inputMode="numeric"
+    maxLength={10}
+    value={leadInfo.phone}
+    onChange={(e) => {
+      const value = e.target.value.replace(/\D/g, ""); // sadece rakam
+      handleLeadInfoChange("phone", value);
+    }}
+    pattern="^5[0-9]{9}$"
+    className={`w-full rounded-lg bg-neutral-900/70 border px-3 py-2 text-sm text-white focus:outline-none ${
+      leadInfo.phone.length === 0
+        ? "border-white/10"
+        : /^5\d{9}$/.test(leadInfo.phone)
+        ? "border-green-500/60"
+        : "border-red-500/50"
+    }`}
+    placeholder="5xx xxx xx xx"
+  />
+
+  {/* Hata mesajı */}
+  {leadInfo.phone.length > 0 && !/^5\d{9}$/.test(leadInfo.phone) && (
+    <p className="text-xs text-red-400">
+      Telefon numarası 5 ile başlamalı ve 10 haneli olmalıdır.
+    </p>
+  )}
+</div>
+
+           <div className="space-y-1">
+  <label className="text-xs text-neutral-300 flex items-center gap-1">
+    <Mail className="h-3 w-3" /> E-posta
+  </label>
+
+  <input
+    type="email"
+    value={leadInfo.email}
+    onChange={(e) => {
+      const value = e.target.value.trim(); // boşlukları sil
+      handleLeadInfoChange("email", value);
+    }}
+    pattern="^[^\s@]+@[^\s@]+\.[^\s@]+$"
+    className={`w-full rounded-lg bg-neutral-900/70 border px-3 py-2 text-sm text-white focus:outline-none ${
+      leadInfo.email.length === 0
+        ? "border-white/10"
+        : /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(leadInfo.email)
+        ? "border-green-500/60"
+        : "border-red-500/50"
+    }`}
+    placeholder="ornek@firma.com"
+  />
+
+  {/* Hata mesajı */}
+  {leadInfo.email.length > 0 &&
+    !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(leadInfo.email) && (
+      <p className="text-xs text-red-400">
+        Lütfen geçerli bir e-posta adresi girin.
+      </p>
+    )}
+</div>
           </div>
 
           <div className="flex justify-between items-center text-xs text-neutral-500">
