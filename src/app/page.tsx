@@ -96,14 +96,88 @@ export default function AgencyApp() {
         <section
           id="contact"
           data-animate="fade-up"
-          className="fade-up-init mt-20 md:mt-28 max-w-4xl mx-auto"
+          className="fade-up-init mt-20 md:mt-28 max-w-6xl mx-auto"
         >
           <Contact />
         </section>
       </main>
 
-      <footer className="mt-12 text-center text-neutral-600 text-xs pb-4 border-t border-white/5 pt-8 relative z-10">
-        © 2024 Dou Social — Bir Yapı Medya kuruluşudur.
+      <footer className="mt-16 border-t border-white/5 bg-black/60 backdrop-blur py-12 relative z-10">
+        <div className="max-w-6xl mx-auto px-4 grid gap-8 md:grid-cols-[1.4fr_1fr_1fr]">
+          <div className="space-y-3">
+            <div className="text-lg font-semibold text-white">
+              Dou<span className="text-[#800000]">Social</span>
+            </div>
+            <p className="text-sm text-neutral-400 leading-relaxed max-w-sm">
+              Creative Performance ajansı olarak strateji, içerik, reklam ve otomasyonu
+              tek sistemde birleştiriyoruz.
+            </p>
+            <p className="text-xs text-neutral-500">© 2026 Dou Social. Tüm hakları saklıdır.</p>
+          </div>
+
+          <div>
+            <h4 className="text-sm font-semibold text-white mb-3">Hızlı Erişim</h4>
+            <div className="flex flex-col gap-2 text-sm">
+              <button
+                onClick={() => setActivePage("home")}
+                className="text-neutral-400 hover:text-white transition-colors text-left"
+              >
+                Ana Sayfa
+              </button>
+              <button
+                onClick={() => setActivePage("about")}
+                className="text-neutral-400 hover:text-white transition-colors text-left"
+              >
+                Hakkımızda
+              </button>
+              <button
+                onClick={() => setActivePage("wizard")}
+                className="text-neutral-400 hover:text-white transition-colors text-left"
+              >
+                Paket Önerici
+              </button>
+              <button
+                onClick={() => setActivePage("contact")}
+                className="text-neutral-400 hover:text-white transition-colors text-left"
+              >
+                İletişim
+              </button>
+              <a
+                href="/kariyer"
+                className="text-neutral-400 hover:text-white transition-colors"
+              >
+                Kariyer
+              </a>
+            </div>
+          </div>
+
+          <div>
+            <h4 className="text-sm font-semibold text-white mb-3">İletişim</h4>
+            <div className="text-sm text-neutral-400 space-y-2">
+              <a
+                href="mailto:info@dousocial.com"
+                className="hover:text-white transition-colors"
+              >
+                info@dousocial.com
+              </a>
+              <a
+                href="tel:+905300845468"
+                className="hover:text-white transition-colors"
+              >
+                +90 530 084 54 68
+              </a>
+              <p>Denizli, Türkiye</p>
+              <a
+                href="https://wa.me/905300845468"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-2 text-[#ffb3b3] hover:text-white transition-colors"
+              >
+                WhatsApp’tan Yazın
+              </a>
+            </div>
+          </div>
+        </div>
       </footer>
     </div>
   );

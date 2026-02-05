@@ -246,36 +246,50 @@ const About = () => {
                 role: "Kurucu / Proje Yöneticisi",
                 image: "/team/dogukan-sahin.png",
                 key: "dogukan",
+                quote:
+                  "DOU’nun temellerini atarken hayalim sadece bir iş değil, bir aile kurmaktı. Her projede bu heyecanı ekibimle paylaşmak en büyük motivasyonum!",
               },
               {
                 name: "Emin Kahraman",
                 role: "CEO",
                 image: "/team/emin-kahraman.png",
+                quote:
+                  "Burada sadece hedefleri değil, başarıyı paylaşmanın tadını çıkarıyoruz. DOU’da vizyonumuzu gerçeğe dönüştürürken her gün yeni bir şeyler öğrenmek paha biçilemez.",
               },
               {
                 name: "Miray Dede",
                 role: "Koordinatör",
                 image: "/team/miray-dede.png",
+                quote:
+                  "Ekipler arası köprü kurarken her sabah bu enerjik ofise gelmek motivasyon kaynağım. DOU’da düzeni sağlamak, bu harika ekiple çok daha keyifli!",
               },
               {
                 name: "Şeyma İrtem",
                 role: "Kameraman",
                 image: "/team/seyma-irtem.png",
+                quote:
+                  "DOU’nun dünyasını vizörden görmek harika bir duygu. En güzel anları ve projeleri ölümsüzleştirirken bu ekibin bir parçası olduğum için çok şanslıyım.",
               },
               {
                 name: "Fuat Koraç",
                 role: "Editör / Grafiker",
                 image: "/team/fuat-korac.png",
+                quote:
+                  "Fikirleri görsel birer şölene dönüştürmek benim işim. DOU’nun yaratıcı özgürlüğü ve ekibimizin desteğiyle her tasarımda kendimi yeniden buluyorum.",
               },
               {
                 name: "Fatih Çakmak",
                 role: "Proje Asistanı",
                 image: "/team/fatih-cakmak.png",
+                quote:
+                  "Projelerin her aşamasında mutfakta olmak ve bu dinamik yapının işlemesine katkı sağlamak çok öğretici. DOU’da her gün yeni bir macera!",
               },
               {
                 name: "Berkant Yıkılmaz",
                 role: "Pazarlama Şefi",
                 image: "/team/berkant-yikilmaz.png",
+                quote:
+                  "Hikayemizi dünyaya anlatmak ve DOU markasını büyütmek benim için bir işten çok daha fazlası. Bu ekiple pazarlamanın sınırlarını zorlamayı seviyorum.",
               },
             ].map((member, i) => (
               <div
@@ -290,6 +304,9 @@ const About = () => {
                 />
                 <h3 className="text-white font-semibold mt-4">{member.name}</h3>
                 <p className="text-neutral-400 text-sm">{member.role}</p>
+                <p className="text-neutral-300 text-xs mt-3 leading-relaxed">
+                  “{member.quote}”
+                </p>
               </div>
             ))}
             </div>

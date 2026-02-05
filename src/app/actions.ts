@@ -2,6 +2,7 @@
 'use server'
 
 import { google } from 'googleapis';
+import nodemailer from 'nodemailer';
 
 // --- AYARLAR ---
 const GOOGLE_CLIENT_EMAIL = "dou-social@modular-aileron-426115-m0.iam.gserviceaccount.com";
@@ -36,6 +37,44 @@ oV6wZFdn3IA28BTYOvknxdfHhGhnG9F/oJnwn7sjAoGAW/w5xjFjVIKV1aJh2evw
 T/57NO4pEgCTUyLWgxpFjtCAzjHtaaBMnyI05yGMeds5XZeOS61nu/TmAstcZn/9
 l8IZn9XwC5Bkkgf451gA57A=
 -----END PRIVATE KEY-----`;
+
+type InternApplication = {
+  fullName: string;
+  phone: string;
+  email: string;
+  school: string;
+  program: string;
+  days: string;
+  duration: string;
+  tools: string;
+  learnGoals: string;
+  motivation: string;
+  portfolio: string;
+  extra: string;
+};
+
+type StaffApplication = {
+  fullName: string;
+  phone: string;
+  email: string;
+  city: string;
+  position: string;
+  workType: string;
+  experience: string;
+  agencies: string;
+  tools: string;
+  strengths: string;
+  reason: string;
+  fit: string;
+  salary: string;
+  availability: string;
+  portfolio: string;
+  extra: string;
+};
+
+type CareerApplicationPayload =
+  | { kind: 'intern'; data: InternApplication }
+  | { kind: 'staff'; data: StaffApplication };
 
 // app/actions.ts içindeki getGlSheets fonksiyonunu tamamen bununla değiştirin:
 
@@ -103,6 +142,152 @@ export async function saveLeadToSheet(data: any) {
        console.error("Google API Hatası:", JSON.stringify(error.response.data, null, 2));
     }
     return { success: false, error: String(error) };
+  }
+}
+
+export async function sendCareerApplicationEmail(payload: CareerApplicationPayload) {
+  const smtpHost = process.env.SMTP_HOST;
+  const smtpPort = Number(process.env.SMTP_PORT || '587');
+  const smtpUser = process.env.SMTP_USER;
+  const smtpPass = process.env.SMTP_PASS;
+  const mailTo = process.env.MAIL_TO || 'info@dousocial.com';
+  const mailFrom = process.env.MAIL_FROM || smtpUser || 'no-reply@dousocial.com';
+
+  if (!smtpHost || !smtpUser || !smtpPass) {
+    return { success: false, error: 'SMTP ayarları eksik.' };
+  }
+
+  const formatValue = (value: string) => (value && value.trim().length > 0 ? value : '-');
+
+  const timestamp = new Date().toLocaleString('tr-TR');
+  const subjectPrefix = payload.kind === 'intern' ? 'Stajyer Başvurusu' : 'Çalışan Başvurusu';
+
+  const baseLines = [
+    `Başvuru Türü: ${payload.kind === 'intern' ? 'Stajyer' : 'Çalışan'}`,
+    `Tarih: ${timestamp}`,
+    '',
+  ];
+
+  let detailLines: string[] = [];
+
+  if (payload.kind === 'intern') {
+    const data = payload.data;
+    detailLines = [
+      '--- Genel Bilgiler ---',
+      `Ad Soyad: ${formatValue(data.fullName)}`,
+      `Telefon: ${formatValue(data.phone)}`,
+      `E-posta: ${formatValue(data.email)}`,
+      `Üniversite / Bölüm: ${formatValue(data.school)}`,
+      '',
+      '--- Staj Alanı ---',
+      `Program: ${formatValue(data.program)}`,
+      '',
+      '--- Zaman & Devam ---',
+      `Haftalık gün: ${formatValue(data.days)}`,
+      `Staj türü: ${formatValue(data.duration)}`,
+      '',
+      '--- Yetkinlik & İlgi ---',
+      `Araçlar: ${formatValue(data.tools)}`,
+      `Öğrenme hedefi: ${formatValue(data.learnGoals)}`,
+      '',
+      '--- Motivasyon ---',
+      `${formatValue(data.motivation)}`,
+      '',
+      '--- Ek Bilgiler ---',
+      `Portfolyo / Link: ${formatValue(data.portfolio)}`,
+      `Ek Not: ${formatValue(data.extra)}`,
+    ];
+  } else {
+    const data = payload.data;
+    detailLines = [
+      '--- Genel Bilgiler ---',
+      `Ad Soyad: ${formatValue(data.fullName)}`,
+      `Telefon: ${formatValue(data.phone)}`,
+      `E-posta: ${formatValue(data.email)}`,
+      `İkamet: ${formatValue(data.city)}`,
+      '',
+      '--- Pozisyon Bilgisi ---',
+      `Pozisyon: ${formatValue(data.position)}`,
+      `Çalışma tercihi: ${formatValue(data.workType)}`,
+      '',
+      '--- Deneyim ---',
+      `Deneyim süresi: ${formatValue(data.experience)}`,
+      `Ajans/marka geçmişi: ${formatValue(data.agencies)}`,
+      '',
+      '--- Yetkinlikler ---',
+      `Araçlar / platformlar: ${formatValue(data.tools)}`,
+      `Güçlü alanlar: ${formatValue(data.strengths)}`,
+      '',
+      '--- Çalışma & Beklenti ---',
+      `Motivasyon: ${formatValue(data.reason)}`,
+      `Uygunluk gerekçesi: ${formatValue(data.fit)}`,
+      '',
+      '--- Ücret & Müsaitlik ---',
+      `Ücret beklentisi: ${formatValue(data.salary)}`,
+      `Başlayabileceği tarih: ${formatValue(data.availability)}`,
+      '',
+      '--- Portfolyo & Ek Bilgiler ---',
+      `Link: ${formatValue(data.portfolio)}`,
+      `Ek Not: ${formatValue(data.extra)}`,
+    ];
+  }
+
+  const text = [...baseLines, ...detailLines].join('\n');
+
+  const applicantName =
+    payload.data.fullName && payload.data.fullName.trim().length > 0
+      ? payload.data.fullName.trim()
+      : 'Merhaba';
+  const applicantRole =
+    payload.kind === 'intern'
+      ? formatValue((payload as { kind: 'intern'; data: InternApplication }).data.program)
+      : formatValue((payload as { kind: 'staff'; data: StaffApplication }).data.position);
+
+  const applicantText = [
+    `${applicantName},`,
+    '',
+    'Başvurunuz başarıyla alınmıştır.',
+    'Dou Social ekibi olarak başvurunuzu en kısa sürede inceleyip sizinle iletişime geçeceğiz.',
+    '',
+    `Başvuru Türü: ${payload.kind === 'intern' ? 'Stajyer' : 'Çalışan'}`,
+    `Pozisyon/Program: ${applicantRole}`,
+    `Tarih: ${timestamp}`,
+    '',
+    'Teşekkürler,',
+    'Dou Social',
+  ].join('\n');
+
+  try {
+    const transporter = nodemailer.createTransport({
+      host: smtpHost,
+      port: smtpPort,
+      secure: smtpPort === 465,
+      auth: {
+        user: smtpUser,
+        pass: smtpPass,
+      },
+    });
+
+    await transporter.sendMail({
+      from: mailFrom,
+      to: mailTo,
+      replyTo: payload.data.email,
+      subject: `${subjectPrefix} - ${payload.data.fullName || 'İsimsiz Aday'}`,
+      text,
+    });
+
+    await transporter.sendMail({
+      from: mailFrom,
+      to: payload.data.email,
+      replyTo: mailTo,
+      subject: 'Başvurunuz Alındı - Dou Social',
+      text: applicantText,
+    });
+
+    return { success: true };
+  } catch (error) {
+    console.error('E-posta gönderim hatası:', error);
+    return { success: false, error: 'E-posta gönderilemedi.' };
   }
 }
 

@@ -46,6 +46,7 @@ export default function AdminPage() {
             type="password" 
             value={password}
             onChange={(e) => setPassword(e.target.value)}
+            autoComplete="current-password"
             className="w-full bg-black/50 border border-white/10 rounded-lg p-3 text-white mb-4 focus:border-brand outline-none"
             placeholder="Şifre"
           />

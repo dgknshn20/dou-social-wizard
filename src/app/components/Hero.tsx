@@ -1,201 +1,218 @@
 "use client";
 
 import React from "react";
-import {
-  Sparkles,
-  CheckCircle,
-  Zap,
-  Activity,
-  HeartPulse,
-  Utensils,
-  Building2,
-} from "lucide-react";
 
 interface HeroProps {
   onStartWizard: () => void;
   onContact: () => void;
 }
 
-// Örnek referans markalar (istersen gerçek müşterilerinle güncellersin)
-const REFERENCES = [
-  { name: "YAPIGRANİT MERMERCİLİK", icon: Building2 },
-  { name: "FITLIFE KITCHEN", icon: Utensils },
-  { name: "EN20 SPORT'S CLUB", icon: Activity },
-  { name: "DYT. CEYLİN YASTIKÇI", icon: HeartPulse },
-];
+const IconScale = () => (
+  <svg
+    xmlns="http://www.w3.org/2000/svg"
+    width="24"
+    height="24"
+    viewBox="0 0 24 24"
+    fill="none"
+    stroke="currentColor"
+    strokeWidth="2"
+    strokeLinecap="round"
+    strokeLinejoin="round"
+    className="text-[#ffb3b3]"
+  >
+    <path d="M12 3V21M3 12H21M16 8L21 12L16 16M8 16L3 12L8 8" />
+  </svg>
+);
+
+const IconChip = () => (
+  <svg
+    xmlns="http://www.w3.org/2000/svg"
+    width="24"
+    height="24"
+    viewBox="0 0 24 24"
+    fill="none"
+    stroke="currentColor"
+    strokeWidth="2"
+    strokeLinecap="round"
+    strokeLinejoin="round"
+    className="text-[#ff4d6d]"
+  >
+    <rect x="2" y="2" width="20" height="20" rx="2" />
+    <path d="M12 12H12.01" />
+    <path d="M2 12H6" />
+    <path d="M18 12H22" />
+    <path d="M12 2V6" />
+    <path d="M12 18V22" />
+  </svg>
+);
+
+const IconTrust = () => (
+  <svg
+    xmlns="http://www.w3.org/2000/svg"
+    width="24"
+    height="24"
+    viewBox="0 0 24 24"
+    fill="none"
+    stroke="currentColor"
+    strokeWidth="2"
+    strokeLinecap="round"
+    strokeLinejoin="round"
+    className="text-emerald-300"
+  >
+    <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" />
+    <path d="M9 12l2 2 4-4" />
+  </svg>
+);
+
+const IconArrowRight = () => (
+  <svg
+    xmlns="http://www.w3.org/2000/svg"
+    width="16"
+    height="16"
+    viewBox="0 0 24 24"
+    fill="none"
+    stroke="currentColor"
+    strokeWidth="2"
+    strokeLinecap="round"
+    strokeLinejoin="round"
+  >
+    <path d="M5 12h14" />
+    <path d="m12 5 7 7-7 7" />
+  </svg>
+);
+
+interface FeatureCardProps {
+  icon: React.ReactNode;
+  title: string;
+  description: string;
+}
+
+const FeatureCard: React.FC<FeatureCardProps> = ({ icon, title, description }) => (
+  <div className="group relative p-6 bg-neutral-900/60 border border-white/10 rounded-2xl hover:bg-white/5 transition-all duration-300 hover:-translate-y-1 overflow-hidden">
+    <div className="absolute inset-0 bg-gradient-to-br from-[#ff4d6d]/10 via-transparent to-[#800000]/10 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+    <div className="relative z-10">
+      <div className="w-12 h-12 mb-4 rounded-lg bg-white/5 flex items-center justify-center group-hover:scale-110 transition-transform duration-300 border border-white/10">
+        {icon}
+      </div>
+      <h3 className="text-lg font-semibold text-white mb-2 tracking-tight">{title}</h3>
+      <p className="text-neutral-400 text-sm leading-relaxed">{description}</p>
+    </div>
+  </div>
+);
 
 const Hero: React.FC<HeroProps> = ({ onStartWizard, onContact }) => {
   return (
-    <section className="relative max-w-6xl mx-auto">
-      {/* ARKA PLAN GLOW */}
-      <div className="pointer-events-none absolute inset-0 opacity-40">
-        <div className="absolute -left-24 top-0 h-64 w-64 rounded-full bg-[#800000]/40 blur-[120px]" />
-        <div className="absolute -right-10 bottom-10 h-72 w-72 rounded-full bg-purple-600/35 blur-[140px]" />
-      </div>
+    <section className="relative max-w-6xl mx-auto overflow-hidden">
+      <style>{`
+        @keyframes heroGridMove {
+          from { background-position: 0 0; }
+          to { background-position: 0 48px; }
+        }
+        @keyframes heroDropLine {
+          0% { transform: translateY(-120%); opacity: 0; }
+          45% { opacity: 1; }
+          100% { transform: translateY(120vh); opacity: 0; }
+        }
+        .hero-grid-flow {
+          animation: heroGridMove 3.5s linear infinite;
+        }
+        .hero-drop-line-1 {
+          animation: heroDropLine 4.6s cubic-bezier(0.4, 0.26, 0, 0.97) infinite;
+        }
+        .hero-drop-line-2 {
+          animation: heroDropLine 6.2s cubic-bezier(0.4, 0.26, 0, 0.97) infinite;
+          animation-delay: 1.2s;
+        }
+        .hero-drop-line-3 {
+          animation: heroDropLine 5.4s cubic-bezier(0.4, 0.26, 0, 0.97) infinite;
+          animation-delay: 0.6s;
+        }
+        .hero-drop-line-4 {
+          animation: heroDropLine 7.1s cubic-bezier(0.4, 0.26, 0, 0.97) infinite;
+          animation-delay: 2.4s;
+        }
+      `}</style>
 
-      <div className="relative flex flex-col md:flex-row items-center gap-10 md:gap-16">
-        {/* SOL KOLON – METİN + CTA */}
-        <div className="w-full md:w-1/2 space-y-8 animate-fade-in">
-          {/* ÜST BADGE */}
-          <div className="inline-flex items-center gap-2 rounded-full border border-[#800000]/40 bg-[#800000]/10 px-4 py-1 text-[11px] font-medium text-[#ffb3b3] shadow-[0_0_25px_rgba(128,0,0,0.6)]">
-            <Sparkles size={14} /> Yapay Zeka Destekli Ajans Deneyimi
-          </div>
+      <div className="pointer-events-none absolute inset-0 -z-10">
+        <div
+          className="absolute inset-0 opacity-[0.045] hero-grid-flow"
+          style={{
+            backgroundImage:
+              "linear-gradient(rgba(255,255,255,0.85) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.85) 1px, transparent 1px)",
+            backgroundSize: "48px 48px",
+          }}
+        />
 
-          {/* BÜYÜK İDDİA */}
-          <h1 className="text-4xl md:text-5xl lg:text-6xl font-extrabold text-white tracking-tight leading-tight">
-            Markalar için{" "}
-            <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#ffcccc] via-white to-[#ffb3b3]">
-              çalışan sistemler
-            </span>{" "}
-            kuruyoruz.
-          </h1>
-
-          {/* ALT AÇIKLAMA */}
-          <p className="text-neutral-300 text-sm md:text-lg max-w-xl leading-relaxed">
-            Sosyal medya + reklam + içerik + otomasyon →{" "}
-            <span className="font-semibold text-white">
-              tek çatı altında, tek strateji ile
-            </span>{" "}
-            yönetiyoruz. Tasarım, performans ve operasyonu birleştirip, ajansı
-            “post atan ekip” olmaktan çıkarıp{" "}
-            <span className="font-semibold text-white">büyüme ortağı</span>{" "}
-            seviyesine taşıyoruz.
-          </p>
-
-          {/* 3 AVANTAJ */}
-          <div className="space-y-2 text-sm">
-            {[
-              "Hızlı ölçeklenebilir sistem: küçük başlayıp güvenle büyüyebilen yapı.",
-              "Üretim + performans + otomasyon: tek dokunuşta uçtan uca çözüm.",
-              "9/10 müşteri tavsiye oranı: uzun vadeli iş ortaklıkları.",
-            ].map((item, i) => (
-              <div key={i} className="flex items-start gap-2">
-                <CheckCircle className="mt-[2px] h-4 w-4 text-emerald-400 shrink-0" />
-                <span className="text-neutral-300">{item}</span>
-              </div>
-            ))}
-          </div>
-
-          {/* CTA BUTONLARI */}
-          <div className="flex flex-col sm:flex-row gap-4 pt-2">
-            <button
-              onClick={onStartWizard}
-              className="inline-flex items-center justify-center gap-2 rounded-full bg-white px-5 py-2.5 text-xs md:text-sm font-semibold text-black shadow-lg shadow-black/40 hover:translate-y-[1px] active:translate-y-[2px] transition-transform"
-            >
-              <Sparkles className="h-4 w-4 text-[#800000]" />
-              1 dakikada paketini bul
-            </button>
-            <button
-              onClick={onContact}
-              className="inline-flex items-center justify-center gap-2 rounded-full border border-white/25 bg-black/40 px-5 py-2.5 text-xs md:text-sm font-semibold text-neutral-100 hover:bg-white/5 hover:border-white/40 transition-colors"
-            >
-              <Zap className="h-4 w-4 text-[#ffb3b3]" />
-              Birlikte nasıl büyüyebileceğimizi konuşalım
-            </button>
-          </div>
+        <div className="absolute inset-0">
+          <div className="absolute top-0 left-[12%] h-[45vh] w-px bg-gradient-to-b from-transparent via-[#800000]/30 to-transparent hero-drop-line-1" />
+          <div className="absolute top-0 left-[32%] h-[30vh] w-px bg-gradient-to-b from-transparent via-[#ff4d6d]/30 to-transparent hero-drop-line-2" />
+          <div className="absolute top-0 right-[26%] h-[52vh] w-px bg-gradient-to-b from-transparent via-[#ffb3b3]/25 to-transparent hero-drop-line-3" />
+          <div className="absolute top-0 right-[10%] h-[38vh] w-px bg-gradient-to-b from-transparent via-[#800000]/20 to-transparent hero-drop-line-4" />
         </div>
 
-        {/* SAĞ KOLON – WIZARD & RAKAMLAR KARTLARI */}
-        <div className="w-full md:w-1/2 relative mt-6 md:mt-0">
-          <div className="relative grid gap-4">
-            {/* Ana kart: Wizard açıklaması */}
-            <div className="rounded-2xl border border-white/10 bg-neutral-900/80 backdrop-blur-xl p-5 md:p-6 shadow-[0_0_40px_rgba(0,0,0,0.6)]">
-              <div className="flex items-center justify-between mb-4">
-                <div className="flex items-center gap-2">
-                  <Sparkles className="h-4 w-4 text-[#ffb3b3]" />
-                  <span className="text-xs font-semibold text-neutral-200">
-                    Dou Social • Creative Performance Wizard
-                  </span>
-                </div>
-                <span className="text-[10px] px-2 py-1 rounded-full bg-emerald-400/10 text-emerald-300 border border-emerald-400/30">
-                  AI destekli plan
-                </span>
-              </div>
-
-              <p className="text-xs md:text-sm text-neutral-300 mb-3">
-                İşletme tipiniz, hedefiniz ve bütçenize göre 3 farklı senaryo
-                çıkarıp; sosyal medya, reklam, prodüksiyon ve otomasyonu tek
-                planda topluyoruz.
-              </p>
-
-              <div className="grid grid-cols-3 gap-2 text-[10px] text-neutral-300">
-                <div className="rounded-xl bg-black/40 border border-white/10 px-3 py-2">
-                  <p className="text-neutral-400 mb-1">Sosyal Medya</p>
-                  <p className="font-semibold text-white">Strateji + Üretim</p>
-                </div>
-                <div className="rounded-xl bg-black/40 border border-white/10 px-3 py-2">
-                  <p className="text-neutral-400 mb-1">Reklam</p>
-                  <p className="font-semibold text-white">Meta &amp; Google</p>
-                </div>
-                <div className="rounded-xl bg-black/40 border border-white/10 px-3 py-2">
-                  <p className="text-neutral-400 mb-1">Otomasyon</p>
-                  <p className="font-semibold text-white">WhatsApp &amp; CRM</p>
-                </div>
-              </div>
-            </div>
-
-            {/* Alt kart: Rakamlarla Dou Social */}
-            <div className="rounded-2xl border border-white/10 bg-neutral-900/70 backdrop-blur-xl p-4 flex flex-col gap-2">
-              <div className="flex items-center justify-between">
-                <span className="text-[11px] text-neutral-400">
-                  Rakamlarla Dou Social
-                </span>
-                <span className="text-[10px] text-neutral-500">Son 12 ay</span>
-              </div>
-
-              <div className="grid grid-cols-3 gap-3 text-[11px]">
-                <div>
-                  <p className="text-neutral-400 mb-1">Aktif Marka</p>
-                  <p className="text-white font-semibold text-sm">15+</p>
-                </div>
-                <div>
-                  <p className="text-neutral-400 mb-1">Aylık İçerik</p>
-                  <p className="text-[#ffb3b3] font-semibold text-sm">
-                    250+
-                  </p>
-                </div>
-                <div>
-                  <p className="text-neutral-400 mb-1">Otomasyon Akışı</p>
-                  <p className="text-emerald-400 font-semibold text-sm">
-                    30+
-                  </p>
-                </div>
-              </div>
-
-              <p className="text-[10px] text-neutral-500 mt-1">
-                Bu değerler geçmiş çalışmaların ortalama çıktı aralıklarıdır;
-                her marka için planı birlikte özelleştiriyoruz.
-              </p>
-            </div>
-          </div>
-        </div>
+        <div className="absolute -left-24 top-0 h-72 w-72 rounded-full bg-[#800000]/35 blur-[140px]" />
+        <div className="absolute -right-16 bottom-6 h-80 w-80 rounded-full bg-[#ff4d6d]/20 blur-[160px]" />
       </div>
 
-      {/* GÜVENEN MARKALAR – MARQUEE ANİMASYONU */}
-      <div className="mt-10 md:mt-14 border-t border-white/5 pt-4">
-        <div className="flex items-center justify-between gap-4 mb-3">
-          <p className="text-[11px] uppercase tracking-[0.2em] text-neutral-500">
-            Güvenen markalar
-          </p>
-          <span className="text-[10px] text-neutral-500">
-            Örnek isimler — gerçek müşterilerinle güncelleyebilirsin
+      <div className="relative z-10 pt-8 md:pt-12 pb-10 flex flex-col items-center text-center">
+        <div className="mb-8 inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/5 border border-white/10 text-xs font-medium text-[#ffb3b3] tracking-wide uppercase backdrop-blur-sm">
+          <span className="relative flex h-2 w-2">
+            <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-[#ff4d6d] opacity-75" />
+            <span className="relative inline-flex rounded-full h-2 w-2 bg-[#ff4d6d]" />
           </span>
+          Creative Performance Intelligence
         </div>
 
-        <div className="relative w-full overflow-hidden">
-          <div className="flex gap-12 whitespace-nowrap marquee-scroll">
-            {[...REFERENCES, ...REFERENCES].map((ref, index) => (
-              <div
-                key={index}
-                className="flex items-center gap-2 opacity-80 hover:opacity-100 transition-opacity duration-300 cursor-default group"
-              >
-                <ref.icon className="w-5 h-5 text-[#800000] group-hover:scale-110 transition-transform" />
-                <span className="text-xs md:text-sm font-semibold tracking-wide text-neutral-400 group-hover:text-white uppercase">
-                  {ref.name}
-                </span>
-              </div>
-            ))}
-          </div>
+        <h1 className="text-4xl md:text-6xl font-bold text-transparent bg-clip-text bg-gradient-to-b from-white to-neutral-400 mb-6 tracking-tight max-w-4xl mx-auto leading-[1.1]">
+          Geleceğin markalarını <br />
+          <span className="bg-clip-text text-transparent bg-gradient-to-r from-[#ffb3b3] to-[#ff4d6d]">
+            sistemlerle
+          </span>{" "}
+          büyütüyoruz.
+        </h1>
+
+        <p className="text-base md:text-lg text-neutral-400 mb-10 max-w-2xl mx-auto leading-relaxed">
+          Dağınık süreçlere son. Reklamdan otomasyona tüm operasyonu tek stratejiyle yönetiyoruz.
+          Sizin için sadece içerik üretmiyoruz; markanızı bir{" "}
+          <span className="text-neutral-200 border-b border-white/10">büyüme ekosistemine</span> dönüştürüyoruz.
+        </p>
+
+        <div className="flex flex-col sm:flex-row gap-4 w-full sm:w-auto mb-16">
+          <button
+            onClick={onStartWizard}
+            className="group relative px-8 py-4 bg-white text-black font-semibold rounded-lg overflow-hidden transition-all hover:scale-105 active:scale-95 shadow-[0_0_20px_rgba(255,255,255,0.1)]"
+          >
+            <div className="absolute inset-0 bg-gradient-to-r from-[#ff4d6d] via-[#ffb3b3] to-[#ff4d6d] opacity-0 group-hover:opacity-20 transition-opacity duration-300" />
+            <span className="relative flex items-center gap-2">
+              Size Özel Çözümü Keşfedin
+              <IconArrowRight />
+            </span>
+          </button>
+
+          <button
+            onClick={onContact}
+            className="px-8 py-4 bg-transparent border border-white/20 text-white font-medium rounded-lg hover:bg-white/5 hover:border-white/40 transition-all active:scale-95 backdrop-blur-sm"
+          >
+            Strateji Toplantısı Planla
+          </button>
+        </div>
+
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 w-full max-w-5xl">
+          <FeatureCard
+            icon={<IconScale />}
+            title="Sınırsız Ölçekleme"
+            description="Taleple birlikte genişleyen, hata payı sıfır yapılar ve modüler büyüme stratejileri."
+          />
+          <FeatureCard
+            icon={<IconChip />}
+            title="Tek Dokunuşta Çözüm"
+            description="Tasarım ve performansı üst düzey teknolojiyle birleştiren uçtan uca mimari."
+          />
+          <FeatureCard
+            icon={<IconTrust />}
+            title="Sarsılmaz Güven"
+            description="Şeffaf raporlama, uzun vadeli iş birlikleri ve ölçülebilir başarı hikayeleri."
+          />
         </div>
       </div>
     </section>
