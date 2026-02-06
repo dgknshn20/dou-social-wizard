@@ -115,6 +115,9 @@ const About = () => {
             stratejisini tek çatı altında bir araya getiren tam kapsamlı bir dijital büyüme ajansıdır.
             Hedefiniz ne olursa olsun, size özel sistemler kuruyoruz.
           </p>
+          <p className="text-xs text-neutral-500">
+            ©️ Dou Social, Yapımedya Reklamcılık A.Ş.’nin tescilli markasıdır.
+          </p>
         </div>
 
         {/* MİSYON & VİZYON */}
@@ -264,8 +267,8 @@ const About = () => {
                   "Ekipler arası köprü kurarken her sabah bu enerjik ofise gelmek motivasyon kaynağım. DOU’da düzeni sağlamak, bu harika ekiple çok daha keyifli!",
               },
               {
-                name: "Şeyma İrtem",
-                role: "Kameraman",
+                name: "Şeyma İrtam",
+                role: "Photographer",
                 image: "/team/seyma-irtem.png",
                 quote:
                   "DOU’nun dünyasını vizörden görmek harika bir duygu. En güzel anları ve projeleri ölümsüzleştirirken bu ekibin bir parçası olduğum için çok şanslıyım.",

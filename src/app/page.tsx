@@ -113,6 +113,9 @@ export default function AgencyApp() {
               tek sistemde birleştiriyoruz.
             </p>
             <p className="text-xs text-neutral-500">© 2026 Dou Social. Tüm hakları saklıdır.</p>
+            <p className="text-xs text-neutral-500">
+              ©️ Dou Social, Yapımedya Reklamcılık A.Ş.’nin tescilli markasıdır.
+            </p>
           </div>
 
           <div>

@@ -176,6 +176,9 @@ const Hero: React.FC<HeroProps> = ({ onStartWizard, onContact }) => {
           Sizin için sadece içerik üretmiyoruz; markanızı bir{" "}
           <span className="text-neutral-200 border-b border-white/10">büyüme ekosistemine</span> dönüştürüyoruz.
         </p>
+        <p className="text-xs text-neutral-500 mb-8">
+          ©️ Dou Social, Yapımedya Reklamcılık A.Ş.’nin tescilli markasıdır.
+        </p>
 
         <div className="flex flex-col sm:flex-row gap-4 w-full sm:w-auto mb-16">
           <button
